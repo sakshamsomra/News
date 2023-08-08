@@ -279,12 +279,6 @@ app.post("/api/login", upload.single('file'), (req, res) => {
 app.post("/api/logout", (req, res) => {
 
 
-  let sqlQuery = "DELETE FROM cart";
-
-  let query = conn.query(sqlQuery, (err, results) => {
-
-
-  });
 
   req.session.destroy(function (err) {
     if (err) {
