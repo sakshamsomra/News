@@ -127,7 +127,7 @@ export default function Home() {
                 list && list.length > 0
                     ?
                     list.filter((val) => {
-                        return searchterm.toLowerCase() === '' ? val : val.body.toLowerCase().includes(searchterm)
+                        return searchterm.toLowerCase() === '' ? val : val.content.toLowerCase().includes(searchterm)
 
                     }).map((val) => {
 
