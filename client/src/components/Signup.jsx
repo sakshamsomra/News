@@ -2,17 +2,18 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Signup() {
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [category, setCategory] = useState("")
 
-
+    axios.defaults.withCredentials = true;
 
     const submitForm = (event) => {
 
@@ -26,6 +27,7 @@ export default function Signup() {
 
         axios.post("https://backend-zeta-sooty.vercel.app/api/users", form).then(() => {
             alert('success for insert');
+            navigate("/");
         })
 
     }
