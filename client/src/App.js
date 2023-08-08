@@ -8,7 +8,6 @@ import './Checkout.css'
 import './cart.css'
 import './card.css'
 import './navbar.css'
-import './Like.css'
 import './info.css'
 
 
@@ -21,7 +20,6 @@ import {
   Routes,
   NavLink
 } from 'react-router-dom';
-import Items from './components/Items';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
@@ -56,8 +54,6 @@ function App() {
 
 
         <Route path="/" element={< Landing />} />
-        <Route path="/items" element={< Items />} />
-        
         <Route path="/home" element={< Home />} />
         <Route path="/sign" element={< Signup />} />
         <Route path="/interest" element={< Interest />} />
