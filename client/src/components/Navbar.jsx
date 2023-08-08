@@ -35,10 +35,7 @@ export default function Navbar() {
 
     const log = () => {
 
-        axios.post("https://backend-zeta-sooty.vercel.app/api/logout", {
-
-
-        }).then((response) => {
+        axios.post("https://backend-zeta-sooty.vercel.app/api/logout").then((response) => {
             if (response.data.message) {
                 alert(response.data.message);
             } else{
