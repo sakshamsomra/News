@@ -1,8 +1,8 @@
 
 html{
-  background-color: #292929;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: #292929 !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
 
 }
 
