@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import './write.css'
 import './Landing.css'
 import './Glass.css'
