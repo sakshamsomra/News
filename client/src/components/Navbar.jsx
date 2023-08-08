@@ -56,7 +56,7 @@ export default function Navbar() {
 
                 <div class="navhold">
                     <Link to={"/sign"}><div id="navitem"> <img src={add}></img> SignIn</div></Link>
-                    <button id="navitem" onClick={log}> <img src={login}></img> LogOut</button>
+                    <Link ><button id="navitem" onClick={log} className="invisible-button"> <img src={login}></img> LogOut</button></Link>
 
                     <Link to={"/interest"}><div id="navitem"><img src={edit}></img>Interests</div></Link>
                     <Link to={"/myinfo"} class="inf"><div id="navitem"><img src={userp}></img>My Info</div></Link>
