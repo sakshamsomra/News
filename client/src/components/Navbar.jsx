@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import home from './photos/home.png'
 import login from './photos/login.png'
 import category from './photos/category.png'
@@ -13,6 +13,9 @@ import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 export default function Navbar() {
+
+    axios.defaults.withCredentials = true;
+    const navigate = useNavigate();
 
 
     const [user, setUser] = useState([]);
