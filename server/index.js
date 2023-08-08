@@ -20,18 +20,18 @@ const isValidEmail = emailValidator.validate('example@email.com');
 
 const sessionStore = new MySQLStore({
   host: 'db4free.net',
-  user: 'puneetsomra',
-  password: 'hello123',
-  database: 'pblogger',
+  user: 'sakshameta',
+  password: 'Internship',
+  database: 'newsdata',
 });
-
+ 
 
 
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors({
-  origin: ["https://blog-project-client.vercel.app"],
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  origin: ["http://localhost:3000"],
+  methods: ["GET", "POST", "DELETE", "PUT"],
   credentials: true
 }));
 
@@ -41,17 +41,15 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
-
 app.set('trust proxy', 1); // Enable trust proxy
-
+ 
 app.use(session({
   key: "userId",
   secret: 'secret',
   resave: true,
   saveUninitialized: true,
   cookie: {
-    secure: true,
-    sameSite: 'none',
+    
     maxAge: 3600000,  // Set the cookie to expire in 30 days
   },
   store: sessionStore,
@@ -63,10 +61,9 @@ app.use(session({
 
 const conn = mysql.createConnection({
   host: 'db4free.net',
-  user: 'puneetsomra',
-  password: 'hello123',
-  database: 'pblogger',
-  port: '3306',
+  user: 'sakshameta',
+  password: 'Internship',
+  database: 'newsdata',
   insecureAuth : true
 });
 
@@ -95,7 +92,7 @@ const upload = multer({ storage: storage });
 
 
 app.get('/api/get', (req, res) => {
-  let sqlQuery = "SELECT * FROM blogs";
+  let sqlQuery = "SELECT * FROM categories";
 
   let query = conn.query(sqlQuery, (err, results) => {
     if (err) throw err;
@@ -113,6 +110,30 @@ app.get('/api/myfeed', (req, res) => {
   });
 });
 
+
+app.get('/api/interests', (req, res) => {
+
+  let sqlq = `SELECT category FROM users WHERE username = '${req.session.user}'`
+
+  let type = "";
+
+  let q1 = conn.query(sqlq, (err, result) => {
+    if (err) throw err;
+    type = result[0].category;
+    let sqlQuery = `SELECT * FROM categories WHERE type = '${type}'`;
+
+  let query = conn.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+    
+
+  })
+
+ 
+  
+}); 
+ 
 
 app.get('/api/getcart', (req, res) => {
   let sqlQuery = "SELECT * FROM cart";
@@ -140,27 +161,16 @@ app.post("/api/blog", upload.single('file'), (req, res) => {
     res.send(apires(results));
   });
 
-  console.log(req.body);
+  console.log(req.body);  
 });
 
+ 
 
-app.post("/api/likes", upload.single('file'), (req, res) => {
-  let id = req.body.id;
-
-  let sqlQuery = `UPDATE blogs SET likes = likes + 1 WHERE id = ${id}`;
-
-  let query = conn.query(sqlQuery, (err, results) => {
-    if (err) throw err;
-    res.send(apires(results));
-  });
-
-  console.log(req.body);
-});
 
 
 
 app.post("/api/users", upload.single('file'), (req, res) => {
-  let data = { email: req.body.email, username: req.body.username, password: req.body.password };
+  let data = { email: req.body.email, username: req.body.username, password: req.body.password, category: req.body.category };
 
   let sqlQuery = "INSERT INTO users SET ?";
 
@@ -196,24 +206,33 @@ app.post("/api/addcart", (req, res) => {
 
 
 
-// app.get("/api/search", (req, res) => { 
-//   const searchterm = req.query.searchterm;  
 
-//   let sqlQuery = `SELECT * FROM blogs WHERE name LIKE '%${searchterm}%'`;
+app.get("/api/email", (req, res) => {
 
+  let sqlQuery = `SELECT email FROM users WHERE username = '${req.session.user}'`;
 
+  let query = conn.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.send(results[0].email);
+    console.log(results[0].email);
+  });
 
-//   let query = conn.query(sqlQuery, data, (err, results) => {
-//     if (err) throw err;  
-//     res.send(apires(results));     
-//   });  
-
-//   console.log(search);    
-// });  
+})
 
 
+app.get("/api/type", (req, res) => {
 
+  let sqlQuery = `SELECT category FROM users WHERE username = '${req.session.user}'`;
 
+  let query = conn.query(sqlQuery, (err, results) => {
+    if (err) throw err;
+    res.send(results[0].category);
+    console.log(results[0].category);
+  });
+
+})
+
+ 
 
 
 app.get("/api/login", (req, res) => {
@@ -256,8 +275,15 @@ app.post("/api/login", upload.single('file'), (req, res) => {
 });
 
 
-app.post("/api/logout", upload.single('file'), (req, res) => {
+app.post("/api/logout", (req, res) => {
 
+
+  let sqlQuery = "DELETE FROM cart";
+
+  let query = conn.query(sqlQuery, (err, results) => {
+
+
+  });
 
   req.session.destroy(function (err) {
     if (err) {
@@ -271,7 +297,7 @@ app.post("/api/logout", upload.single('file'), (req, res) => {
 })
 
 
-app.post('/api/delete/:id', (req, res) => {
+app.delete('/api/delete/:id', (req, res) => {
   const id = req.params.id;
 
   const sqlQuery = 'DELETE FROM blogs WHERE id = ?';
