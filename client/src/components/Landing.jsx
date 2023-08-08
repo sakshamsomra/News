@@ -91,7 +91,7 @@ export default function Landing() {
                         </center>
 
                        
-        <p class="signin">Don't have an acount ? <Link to={'/sign'}>Signin</Link> </p>    
+        <p class="signin">Don't have an acount ? <Link to={'/sign'}>SignUp</Link> </p>    
                 </form>
             </div>
 
