@@ -141,7 +141,7 @@ export default function Home() {
                                     {val.date}
                                 </div>
                                 <div class="card__date" >
-                                    posted by ~ {val.name}
+                                    posted by ~ Hinustan Times
 
 
                                 </div>
