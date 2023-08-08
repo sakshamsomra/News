@@ -39,6 +39,7 @@ export default function Navbar() {
             if (response.data.message) {
                 alert(response.data.message);
             }
+            alert('logged out');
 
         })
 
