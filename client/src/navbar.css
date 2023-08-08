@@ -22,6 +22,11 @@
     
   }
 
+#logbutt{
+  background: transparent;
+border: none !important;
+}
+
 
   .nav-outer-container {
     /* Set a fixed width for the outer container */
