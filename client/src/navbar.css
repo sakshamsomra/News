@@ -22,7 +22,7 @@
     
   }
 
-invisible-button{
+.invisible-button{
   background: transparent;
   border: none !important;
 }
