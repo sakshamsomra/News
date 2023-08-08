@@ -106,7 +106,7 @@ export default function Home() {
                             <span class="heading">Top</span>
                             <span class="content">Breaking News </span>
                             <p>A petition has been filed in Supreme Court alleging "blatant hate speeches" calling for violence and social and economic boycott of Muslims at rallies in different states, including Haryana where recent communal clashes claimed six lives.</p>
-                            <Link to="/write" >Start writing</Link>
+                            
                         </div>
                     </div>
                 </div></div>
