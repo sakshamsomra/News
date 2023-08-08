@@ -38,8 +38,11 @@ export default function Navbar() {
         }).then((response) => {
             if (response.data.message) {
                 alert(response.data.message);
+            } else{
+                alert("Logged out");
+                navigate("/");
             }
-            alert('logged out');
+            
 
         })
 
