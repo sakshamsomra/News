@@ -1,9 +1,9 @@
 body{
 
-  background-image: url("./components/photos/back.png");
+  background-image: url("./components/photos/back.png") ;
   
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover !important;
  
 }
 
